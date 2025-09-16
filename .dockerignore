@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.dist/
+.venv/
+venv/
+pip-wheel-metadata/
+
+# VCS / tooling
+.git/
+.gitignore
+.idea/
+.vscode/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Tests & local artifacts
+tests/
+.coverage
+htmlcov/
+reports/
+
+# Node / misc
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
