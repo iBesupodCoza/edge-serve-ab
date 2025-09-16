@@ -1,5 +1,4 @@
 import time
-from typing import Optional
 
 from fastapi import APIRouter, Response
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Gauge, Histogram, generate_latest
@@ -38,7 +37,7 @@ class MetricsMiddleware:
 
         start = time.perf_counter()
         method = scope.get("method", "GET")
-        route_path: Optional[str] = None  # set later when we have route
+        route_path: str | None = None  # set later when we have route
 
         async def send_wrapper(message: Message) -> None:
             nonlocal route_path
