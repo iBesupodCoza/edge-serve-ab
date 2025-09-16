@@ -74,7 +74,7 @@ async def _fire_shadow(app: FastAPI, model_from: str, x: np.ndarray, deadline: f
         shadow_deadline = min(deadline, asyncio.get_running_loop().time() + 0.05)
         _ = await inf.infer(x, deadline=shadow_deadline)
         SHADOW_REQS.labels(model_from, target, "ok").inc()
-    except Exception as e:  # noqa: BLE001 (observability is enough)
+    except Exception as e:
         SHADOW_REQS.labels(model_from, "B" if model_from == "A" else "A", "err").inc()
         log.warning("shadow_error", from_model=model_from, err=str(e))
 
@@ -115,8 +115,8 @@ async def infer(req: Request, body: InferRequest, response: Response) -> InferRe
     override = req.headers.get("X-Model-Override")
     shadow_forced = override == "shadow"
     if sh_enabled or shadow_forced:
-        # Do not await; fire and forget
-        asyncio.create_task(_fire_shadow(app, group, x, deadline))
+        # Do not await; fire and forget — keep a ref to satisfy RUF006
+        _task = asyncio.create_task(_fire_shadow(app, group, x, deadline))  # noqa: F841
 
     return InferResponse(
         trace_id=str(uuid.uuid4()),
