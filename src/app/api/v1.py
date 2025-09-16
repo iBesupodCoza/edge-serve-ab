@@ -115,8 +115,12 @@ async def infer(req: Request, body: InferRequest, response: Response) -> InferRe
     override = req.headers.get("X-Model-Override")
     shadow_forced = override == "shadow"
     if sh_enabled or shadow_forced:
-        # Do not await; fire and forget — keep a ref to satisfy RUF006
-        _task = asyncio.create_task(_fire_shadow(app, group, x, deadline))  # noqa: F841
+        # Do not await; fire and forget — keep a reference (satisfies RUF006)
+        task = asyncio.create_task(_fire_shadow(app, group, x, deadline))
+        if not hasattr(app.state, "bg_tasks"):
+            app.state.bg_tasks = set()
+        app.state.bg_tasks.add(task)
+        task.add_done_callback(app.state.bg_tasks.discard)
 
     return InferResponse(
         trace_id=str(uuid.uuid4()),
