@@ -1,0 +1,12 @@
+# Ruff configuration for edge-serve-ab
+# Works with Ruff 0.6.x+
+target-version = "py312"
+line-length = 100
+extend-exclude = [".venv", "build", "dist", ".mypy_cache", ".pytest_cache"]
+
+[lint]
+select = ["E", "F", "B", "I", "UP", "C90", "RUF"]
+ignore = ["E501"]  # Black handles line-length; keep Ruff quiet on it.
+
+[lint.isort]
+known-first-party = ["app"]
