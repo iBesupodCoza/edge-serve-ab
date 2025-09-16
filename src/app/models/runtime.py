@@ -83,11 +83,11 @@ class ONNXBatchInferencer:
         timeout = max(0.0, deadline - loop.time())
         try:
             return await asyncio.wait_for(fut, timeout=timeout)
-        except asyncio.TimeoutError as _:
+        except TimeoutError:
             # Inform the worker that we gave up; but worker will set the result regardless.
             raise_deadline()
 
-    async def _loop(self) -> None:
+    async def _loop(self) -> None:  # noqa: C901
         while True:
             xs: list[np.ndarray] = []
             futs: list[asyncio.Future] = []
