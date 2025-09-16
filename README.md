@@ -1,5 +1,7 @@
 # edge-serve-ab
 
+This project is a FastAPI + ONNX Runtime microservice that serves image inference with A/B routing (sticky cookies), optional shadow traffic, token-bucket rate limiting, payload size guards, and end-to-end observability (Prometheus metrics, Grafana dashboards, structured logs, request tracing). It ships with Blue/Green promotion (B→A), Docker/Compose/Kubernetes manifests, k6 load tests, and a clean admin API.
+
 A fast A/B image-inference service with production-grade guardrails and observability:
 - **A/B routing** with sticky cookies and optional **shadow traffic**
 - **FastAPI** + **ONNX Runtime** (batching)
