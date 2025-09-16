@@ -1,0 +1,25 @@
+groups:
+  - name: edge-serve-ab.rules
+    interval: 15s
+    rules:
+      # If your app exposes a standard request counter named http_requests_total:
+      - record: job:route:requests_per_second
+        expr: sum by (route,method) (rate(http_requests_total[1m]))
+
+      # Rate-limited requests per route (adjust to your metric name if needed)
+      - record: job:route:rate_limited_per_second
+        expr: sum by (route) (rate(RATE_LIMITED[1m])) or sum by (route) (rate(rate_limited_total[1m]))
+
+      # Payload rejects per route
+      - record: job:route:payload_rejects_per_second
+        expr: sum by (route) (rate(PAYLOAD_REJECTS[1m])) or sum by (route) (rate(payload_rejects_total[1m]))
+
+      # A/B assignment share
+      - record: job:ab_assign_per_second
+        expr: sum by (le,group) (rate(AB_ASSIGN[1m])) or sum by (group) (rate(ab_assign_total[1m]))
+
+      # Shadow reqs ok/err split
+      - record: job:shadow_ok_per_second
+        expr: sum(rate(SHADOW_REQS{status="ok"}[1m])) or sum(rate(shadow_reqs_total{status="ok"}[1m]))
+      - record: job:shadow_err_per_second
+        expr: sum(rate(SHADOW_REQS{status="err"}[1m])) or sum(rate(shadow_reqs_total{status="err"}[1m]))
