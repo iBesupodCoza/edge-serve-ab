@@ -1,0 +1,59 @@
+{
+  "title": "Edge Serve A/B",
+  "tags": ["edge-serve-ab"],
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "version": 1,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "RPS by route",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        { "refId": "A", "expr": "job:route:requests_per_second" },
+        { "refId": "B", "expr": "sum by (route,method) (rate(http_requests_total[1m]))" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "429 rate by route",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        { "refId": "A", "expr": "job:route:rate_limited_per_second" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Payload rejects (413) by route",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [
+        { "refId": "A", "expr": "job:route:payload_rejects_per_second" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "A/B assignment (per second)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "targets": [
+        { "refId": "A", "expr": "job:ab_assign_per_second" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Shadow traffic ok/err",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 },
+      "targets": [
+        { "refId": "A", "expr": "job:shadow_ok_per_second", "legendFormat": "ok" },
+        { "refId": "B", "expr": "job:shadow_err_per_second", "legendFormat": "err" }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "k6 success ratio (infer)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 16 },
+      "targets": [
+        { "refId": "A", "expr": "sum(infer_2xx) / (sum(infer_2xx) + sum(infer_429) + sum(infer_5xx))" }
+      ]
+    }
+  ]
+}
